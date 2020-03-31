@@ -2,7 +2,7 @@
 libname classdat "C:\EPI5143 Course Material\datasets"; 
 libname ex "C:\EPI5143 Course Material\EPI5143 exercise"; 
 
-*Create dataset with only 2003; 
+*Use EncStartDtm to identify encounters occurring in 2003;
 data nencounter;
 set classdat.nencounter;
 if year(datepart(EncStartDtm))=2003 then output; 
@@ -14,7 +14,7 @@ run;
 
 *Creating my INPT flag;
 data inpt;
-set nencounter;
+set nencounters;
 	by EncPatWID;
 	if first.EncPatWID=1 then do; *intialize flag to 0 for first visit of each patient; 
 	inpt=0;count=0; 
@@ -40,7 +40,7 @@ run;
                    1        1074       37.15          2891       100.00 */
 
 data emerg;
-set nencounter;
+set nencounters;
 	by EncPatWID;
 	if first.EncPatWID=1 then do;
 	emerg=0;count=0; 
